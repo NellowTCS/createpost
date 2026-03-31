@@ -2,25 +2,117 @@
 <html>
 
 <head>
-    <title>My Page</title>
+    <title>Create-A-Post</title>
     <link rel="stylesheet" data-inline="true" href="./styles/styles.css" />
     <!-- Embed build info -->
     <script id="build-info" type="application/json">
     {
       "version": "0.1.0",
       "hash": "BUILD_HASH_WILL_BE_INJECTED",
-      "project": "Web-Template"
+      "project": "createpost"
     }
     </script>
 </head>
 
 <body>
+    <div class="container">
+        <h1>Create-A-Post</h1>
+
+        <div class="section">
+            <h2>GitHub Settings</h2>
+            <label>Personal Access Token</label>
+            <input type="password" id="token" placeholder="ghp_..." />
+            <div class="hint">Needs repo scope (full control of private repos)</div>
+
+            <label style="margin-top: 1rem">Repository (owner/repo)</label>
+            <input type="text" id="repo" placeholder="username/username.github.io" />
+
+            <label style="margin-top: 1rem">Base Path</label>
+            <input type="text" id="basePath" value="src/routes/(blog-article)/"
+                placeholder="src/routes/(blog-article)/" />
+
+            <label style="margin-top: 1rem">Images Path</label>
+            <input type="text" id="imagesPath" value="static/images/posts/" placeholder="static/images/posts/" />
+            <div class="hint">Public URL prefix (e.g., /images/posts/ for static/images/posts/)</div>
+        </div>
+
+        <div class="section">
+            <h2>Post Details</h2>
+            <div class="row">
+                <div>
+                    <label>Title *</label>
+                    <input type="text" id="title" placeholder="My Post Title" />
+                </div>
+                <div>
+                    <label>Slug (auto from title)</label>
+                    <input type="text" id="slug" placeholder="my-post-title" />
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 1rem">
+                <div>
+                    <label>Date (ISO format)</label>
+                    <input type="text" id="date" placeholder="2025-03-12T13:19:00-06:00" />
+                    <div class="hint">e.g., 2025-03-12T13:19:00-06:00</div>
+                </div>
+                <div>
+                    <label>Updated (optional)</label>
+                    <input type="text" id="updated" placeholder="2025-03-15T10:00:00-06:00" />
+                </div>
+                <div>
+                    <label>Hidden</label>
+                    <select id="hidden">
+                        <option value="false">No</option>
+                        <option value="true">Yes</option>
+                    </select>
+                </div>
+            </div>
+
+            <label style="margin-top: 1rem">Tags (comma separated)</label>
+            <input type="text" id="tags" placeholder="javascript, tutorial, guide" />
+            <div class="hint">Example: JavaScript, CSS, Tutorial</div>
+
+            <label style="margin-top: 1rem">Keywords (comma separated)</label>
+            <input type="text" id="keywords" placeholder="Guide, Web, Tutorial" />
+            <div class="hint">Example: Guide, Web, Beginner</div>
+
+            <label style="margin-top: 1rem">Excerpt</label>
+            <input type="text" id="excerpt" placeholder="A brief description for the post" />
+
+            <label style="margin-top: 1rem">Cover Image</label>
+            <div class="tab-buttons">
+                <button type="button" class="tab-btn active" data-tab="url">URL</button>
+                <button type="button" class="tab-btn" data-tab="upload">Upload</button>
+            </div>
+            <div class="tab-content active" id="tab-url">
+                <input type="text" id="coverImageUrl" placeholder="/images/posts/my-post.png" />
+            </div>
+            <div class="tab-content" id="tab-upload">
+                <input type="file" id="coverImageFile" accept="image/*" />
+                <img id="imagePreview" alt="Preview" />
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Content</h2>
+            <textarea id="content" placeholder="Write your post content here in Markdown..."></textarea>
+        </div>
+
+        <div class="section">
+            <h2>Preview</h2>
+            <button type="button" id="previewBtn">Update Preview</button>
+            <div id="pathInfo" class="path-info" style="display: none">
+                <strong>File:</strong> <span id="filePathDisplay"></span><br />
+                <strong>Image:</strong> <span id="imagePathDisplay"></span>
+            </div>
+            <div id="previewContent" class="preview-box"></div>
+        </div>
+
+        <button id="submit">Create Post</button>
+        <div id="message"></div>
+    </div>
+
     <script type="module" data-inline="true" src="./src/main.js"></script>
-    <h1>Hello, world!</h1>
-    <p>This is a demo page.</p>
-    <button onclick="testFunction()">Click me!</button>
-    <button onclick="outputToPage()">Show a square.</button>
-    
     <!-- Updato client -->
     <script src="https://nellowtcs.me/updato-cdn/updato.min.js"></script>
     <script>

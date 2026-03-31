@@ -46,20 +46,20 @@ jobs:
             "hash": "${{ steps.version.outputs.hash }}",
             "timestamp": "${{ steps.version.outputs.timestamp }}",
             "notes": "${{ steps.version.outputs.notes }}",
-            "project": "Web-Template"
+            "project": "Create-A-Post"
           }
           EOF
 
       - name: Rename for distribution
         working-directory: Build/dist
-        run: mv index.html Web-Template.html
+        run: mv index.html Create-A-Post.html
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Web-Template-Build
+          name: Create-A-Post-Build
           path: |
-            Build/dist/Web-Template.html
+            Build/dist/Create-A-Post.html
             Build/dist/version.json
           if-no-files-found: error
 
@@ -72,7 +72,7 @@ jobs:
           client-payload: |
             {
               "repo": "${{ github.repository }}",
-              "artifact_name": "Web-Template-Build",
-              "project_name": "Web-Template",
+              "artifact_name": "Create-A-Post-Build",
+              "project_name": "Create-A-Post",
               "version": "${{ steps.version.outputs.version }}"
             }
